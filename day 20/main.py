@@ -1,18 +1,29 @@
-from turtle import Screen, Turtle
+from turtle import Screen
+from snack import Snack
+import time
 
 screen = Screen()
 screen.setup(width=600, height=600)
 screen.bgcolor("black")
 screen.title("Snack Game")
+screen.tracer(0)
 
-segments = []
-xposition = 0
-# xpositions = [(0 ,0), (-20, 0), (-40, 0)]
-for index in range(3):
-  segments.append(Turtle(shape="square"))
-  segments[index].color("white")
-  segments[index].goto(x=xposition, y=0)
-  xposition -= 20
 
+snack = Snack()
+
+
+screen.listen()
+screen.onkey(snack.up, "Up")
+screen.onkey(snack.down, "Down")
+screen.onkey(snack.left, "Left")
+screen.onkey(snack.right, "Right")
+
+
+game_is_on = True
+while game_is_on:
+  screen.update()
+  time.sleep(.1)
+  snack.move()
+  
 
 screen.exitonclick()
